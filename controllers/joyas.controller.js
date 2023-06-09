@@ -8,10 +8,12 @@ const getAllJoyas = async (req, res) => {
 
     //const { limit } = req.query;//*traigo el limit por req.query
     // const { limit = 2 } = req.query; => se puede limitar 'por defecto'
-    console.log(req.query);
+    const { sort, limit } = req.query;
 
     try {
-        const result = await joyasModel.findAll();
+        const result = await joyasModel.findAll({ sort, limit });
+        //console.log(Object.keys(sort)[0])
+        //console.log(Object.values(sort)[0])
         return res.json({ ok: true, result });
         //return res.json(req.query);
     } catch (error) {

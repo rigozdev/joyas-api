@@ -11,6 +11,11 @@ export const handleErrors = (code) => {
                 status: 400,
                 message: "Formato no válido en el parámetro."
             }
+        case '42601':
+            return {
+                status: 400,
+                message: "Error en consulta a bd"
+            }
         case '400':
             return {
                 status: 400,

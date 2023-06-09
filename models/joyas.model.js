@@ -8,10 +8,26 @@ import { pool } from "../db/connection.js";
 
 // ? instalación de pg-format => 'npm i pg-format'
 
-export const findAll = async () => {
+export const findAll = async ({ sort, limit }) => {
 
-    const text = "SELECT * FROM inventario ORDER BY %s %s";
-    const formattedQuery = format(text, 'nombre', 'asc')
+    let baseQuery = "SELECT * FROM inventario ";
+    const arrayValores = [];
+
+    if (sort) {
+        const nombrePropiedad = Object.keys(sort)[0];//* nombre de propiedad(llave)
+        const nombreValor = Object.values(sort)[0];//* nombre de valor(value)
+        baseQuery += "ORDER BY %s %s "
+        arrayValores.push(nombrePropiedad, nombreValor);
+    }
+
+    if(limit){
+        baseQuery += "LIMIT %s"
+        arrayValores.push(limit);
+    }
+
+    const formattedQuery = format(baseQuery, ...arrayValores);
+
+
     const { rows } = await pool.query(formattedQuery);
     return rows;
 };
