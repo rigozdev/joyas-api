@@ -7,6 +7,7 @@ const router = Router(); //! se crea instanca de router desde express
 
 
 router.get('/joyas', joyasController.getAllJoyas);
+router.get('/joyas/filter', joyasController.getAllJoyasFiltered);
 
 export default router;//!exportamos por defecto hacia index.js
 //! esto con el fin de creación de middleware

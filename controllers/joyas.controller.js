@@ -37,7 +37,21 @@ const getAllJoyas = async (req, res) => {
 //     }
 // };
 
+const getAllJoyasFiltered = async (req, res) => {
+    const { filters } = req.query;
+
+    try {
+        const result = await joyasModel.findMany({ filters });
+        return res.json({ ok: true, result });
+    } catch (error) {
+        console.error(error);
+        const { status, message } = handleErrors(error.code);
+        return res.status(status).json({ ok: false, result: message });
+    }
+};
+
 
 export const joyasController = {
-    getAllJoyas
+    getAllJoyas,
+    getAllJoyasFiltered
 };
