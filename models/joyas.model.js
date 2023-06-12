@@ -112,13 +112,6 @@ export const findMany = async ({ filters }) => {
 };
 
 
-// export const findAll = async ({ limit }) => {
-//     console.log(limit);
-//     const text = "SELECT * FROM inventario LIMIT $1"
-//     const { rows } = await pool.query(text, [limit]);
-//     return rows;
-// };
-
 export const joyasModel = {
     findAll,
     findById,
