@@ -3,6 +3,7 @@ import { handleErrors } from '../db/errorHandler.js';
 //! importación de consultas en model
 import { joyasModel } from '../models/joyas.model.js';
 
+
 const getAllJoyas = async (req, res) => {
     //? todo aquí dentro de un try{}catch(){}
 
@@ -11,8 +12,9 @@ const getAllJoyas = async (req, res) => {
     const { sort, limit = 5, page = 1 } = req.query;
 
     try {
-        const result = await joyasModel.findAll({ sort, limit, page });
-        return res.json({ ok: true, result });
+        const meta = await joyasModel.findAll({ sort, limit, page });
+        return res.status(200).json({ ok: true, meta });
+
 
     } catch (error) {
         console.error(error);
