@@ -34,7 +34,7 @@ export const findAll = async ({ sort, limit, page }) => {
 
     const formattedQuery = format(baseQuery, ...arrayValores);
 
-    const hateoasText = "SELECT * FROM inventario"
+    const hateoasText = "SELECT * FROM inventario";
 
     const { rows } = await pool.query(formattedQuery);
     const { rows: data } = await pool.query(hateoasText);
@@ -57,8 +57,17 @@ export const findAll = async ({ sort, limit, page }) => {
     }
 
     return finalAnswer;
-    
+
 };
+
+export const findById = async ({ id }) => {
+    const query = "SELECT * FROM inventario WHERE id = $1";
+    const { rows } = await pool.query(query, [id]);
+    if (rows.length < 1) {
+        throw {code: "404"};
+    }
+    return rows[0];
+}
 
 export const findMany = async ({ filters }) => {
     let baseQuery = "SELECT * FROM inventario ";
@@ -112,5 +121,6 @@ export const findMany = async ({ filters }) => {
 
 export const joyasModel = {
     findAll,
+    findById,
     findMany
 };

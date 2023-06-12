@@ -13,5 +13,5 @@ app.use('', joyasRouter);//!middleware que antepone ruta '/api'
 /* ---------------------Escucha de puerto---------------------- */
 export const PORT = process.env.PORT || 2100;
 app.listen(PORT, () => {
-    console.log('Escuchando peticiones en: http://localhost:' + PORT);
+    console.log('Escuchando peticiones en: http://localhost:' + PORT + '/joyas');
 });
